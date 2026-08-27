@@ -61,7 +61,6 @@ def main():
             time.sleep(1)
 
         else:
-            first_answer = answers_list[0]
             print(f"Incorrect. The right answer was {best_answer}.\n")
             time.sleep(2)
         
