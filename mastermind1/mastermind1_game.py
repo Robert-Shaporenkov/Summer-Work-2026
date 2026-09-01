@@ -1,5 +1,5 @@
 from random import randint
-from collections import Counter
+
 
 code = str(randint(1000, 9999))
 user_guess = "-1"
@@ -27,17 +27,21 @@ def prompt_validate_input(num_of_turns):
             print("Error: enter a valid number.", end="\n\n")
 
 def main_loop(user_guess, num_of_turns):
-    while user_guess != code:
+
+    while True:
         user_guess = prompt_validate_input(num_of_turns)
 
         if user_guess == code:
             break
 
-        code_counter = Counter(code)
-        guess_counter = Counter(user_guess)
+        code_list = list(code)
+        shared_digits_count = 0
+        for digit in user_guess:
+            if digit in code_list:
+                shared_digits_count += 1
+                code_list.remove(digit)
 
-        shared_digits = sum((code_counter & guess_counter).values())
-        print(f"You got {shared_digits} digits right!", end="\n\n")
+        print(f"You got {shared_digits_count} digits right!", end="\n\n")
         num_of_turns += 1
 
     print(f"Well done! The mystery number was {code}. You got it in {num_of_turns} tries.")
